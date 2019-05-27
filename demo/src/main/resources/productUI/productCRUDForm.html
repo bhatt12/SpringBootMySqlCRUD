@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<style>
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAAA0;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+div.formDiv{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  width: 600px;
+  margin: auto;
+}
+
+div.titleDiv{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  width: 200px;
+  margin: auto;
+  margin-bottom: 10px;
+  text-align: center;
+
+}
+
+body{
+	font-family: sans-serif;
+}
+</style>
+
+<head>
+<title>ProductForm</title>
+<script type = "text/javascript" src = "js/productwebservices.js" ></script>
+</head>
+
+<body>
+
+
+<div class="titleDiv">
+	<h3>Product Details</h3>
+</div>
+
+<div class="formDiv">
+  <form>
+    <label for="pName">Product Name</label>
+    <input type="text" id="productName" name="productName" placeholder="Product name..">
+
+    <label for="pPrice">Product Price</label>
+    <input type="text" id="productPrice" name="productPrice" placeholder="Product Price..">
+ 
+
+    <input type="submit" value="ADD" onclick="submitProduct()">
+    <input type="submit" value="DELETE" onclick="removeProduct()">
+    <input type="submit" value="UPDATE" onclick="modifyProduct()">
+    <input type="submit" value="FIND" onclick="getProduct()">
+	
+  </form>
+  
+</div>
+
+<script type="text/javascript">
+	function submitProduct(){
+		var product = {
+			name : document.getElementById('productName').value,
+			price: parseInt(document.getElementById('productPrice').value)
+		}
+		createProduct(product);
+	}
+	
+	function removeProduct(){
+		var productId = prompt("Please enter id of product to be deleted");
+		deleteProduct(productId);
+	}
+	
+	function modifyProduct(){
+	    var productId = prompt("Please enter id of product to be updated");
+		var product = {
+			name : document.getElementById('productName').value,
+			price: parseInt(document.getElementById('productPrice').value)
+		}
+		updateProduct(productId, product);
+	}
+	
+	function getProduct(){
+		var productId = prompt("Please enter id of product to be found");
+		var product = findProduct(productId);
+		document.getElementById('productName').value = product.name;
+		document.getElementById('productPrice').value = product.price;
+	}
+</script>
+</body>
+</html>
